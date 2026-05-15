@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>攻略列表 - 游戏攻略大全</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: "Microsoft YaHei", sans-serif; }
+    body { background:#f5f7fa; color:#333; }
+    .container { width:90%; max-width:1200px; margin:0 auto; }
+    header { background:#2c3e50; color:white; padding:1rem 0; position:sticky; top:0; z-index:999; }
+    .nav { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .logo { font-size:1.5rem; font-weight:bold; }
+    .nav-links a { color:white; text-decoration:none; margin-left:1.2rem; }
+    .nav-links a:hover { color:#3498db; }
+    .search-box { display:flex; gap:0.5rem; }
+    .search-box input { padding:0.5rem 0.8rem; border:none; border-radius:4px; width:220px; }
+    .search-box button { padding:0.5rem 0.8rem; background:#3498db; color:white; border:none; border-radius:4px; cursor:pointer; }
+    
+    .page-title { margin:2rem 0; font-size:1.8rem; color:#222; }
+    .guide-list { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+    .guide-card { background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); transition:0.3s; }
+    .guide-card:hover { transform:translateY(-5px); }
+    .guide-card img { width:100%; height:180px; object-fit:cover; }
+    .guide-info { padding:1rem; }
+    .guide-tag { display:inline-block; font-size:0.75rem; background:#e1f5fe; color:#0288d1; padding:0.2rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; }
+    .guide-title { font-size:1.1rem; margin-bottom:0.5rem; }
+    .guide-desc { font-size:0.9rem; color:#666; margin-bottom:0.8rem; }
+    .read-more { color:#3498db; text-decoration:none; }
 
+    footer { background:#2c3e50; color:white; text-align:center; padding:1.5rem 0; margin-top:2rem; }
+    @media (max-width:768px) { .nav { flex-direction:column; align-items:flex-start; } .search-box { width:100%; } .search-box input { flex:1; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="nav">
+      <div class="logo">🎮 游戏攻略大全</div>
+      <div class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="list.html">攻略列表</a>
+        <a href="detail.html">攻略详情</a>
+        <a href="#">关于我们</a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="搜索攻略...">
+        <button>搜索</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <h2 class="page-title">全部攻略</h2>
+  <div class="guide-list">
+    <div class="guide-card"><img src="https://picsum.photos/600/400?random=1"><div class="guide-info"><span class="guide-tag">开放世界</span><h3>原神 5.0 宝箱全收集</h3><p class="guide-desc">一键跟着跑，不遗漏任何宝箱</p><a href="detail.html" class="read-more">查看详情</a></div></div>
+    <div class="guide-card"><img src="https://picsum.photos/600/400?random=2"><div class="guide-info"><span class="guide-tag">动作游戏</span><h3>黑神话：悟空 BOSS攻略</h3><p class="guide-desc">招式拆解+闪避时机+输出位置</p><a href="detail.html" class="read-more">查看详情</a></div></div>
+    <div class="guide-card"><img src="https://picsum.photos/600/400?random=3"><div class="guide-info"><span class="guide-tag">角色扮演</span><h3>龙腾世纪 职业推荐</h3><p class="guide-desc">新手最强职业与加点方案</p><a href="detail.html" class="read-more">查看详情</a></div></div>
+    <div class="guide-card"><img src="https://picsum.photos/600/400?random=4"><div class="guide-info"><span class="guide-tag">射击游戏</span><h3>无畏契约 瞄准技巧</h3><p class="guide-desc">急停、压枪、预瞄教学</p><a href="detail.html" class="read-more">查看详情</a></div></div>
+    <div class="guide-card"><img src="https://picsum.photos/600/400?random=5"><div class="guide-info"><span class="guide-tag">策略游戏</span><h3>文明7 开局攻略</h3><p class="guide-desc">科技路线+城市规划技巧</p><a href="detail.html" class="read-more">查看详情</a></div></div>
+    <div class="guide-card"><img src="https://picsum.photos/600/400?random=6"><div class="guide-info"><span class="guide-tag">独立游戏</span><h3>星露谷物语 完美流程</h3><p class="guide-desc">季节规划+赚钱最快方法</p><a href="detail.html" class="read-more">查看详情</a></div></div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2025 游戏攻略大全 - 仅供攻略分享</p>
+  </div>
+</footer>
+</body>
+</html>
