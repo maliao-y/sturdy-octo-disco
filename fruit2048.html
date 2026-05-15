@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>水果2048 通关小游戏</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Microsoft YaHei",sans-serif;
+}
+body{
+  background:#f0f8ff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:30px 10px;
+}
+h1{
+  color:#ff6b6b;
+  margin-bottom:15px;
+}
+.info{
+  font-size:18px;
+  margin-bottom:20px;
+  color:#555;
+}
+#gameContainer{
+  background:#bbada0;
+  padding:15px;
+  border-radius:12px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+.cell{
+  width:70px;
+  height:70px;
+  background:#cdc1b4;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:bold;
+}
+.btn{
+  margin-top:20px;
+  padding:10px 25px;
+  background:#ff6b6b;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
+.btn:hover{
+  background:#ee5253;
+}
+.gameOver{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:#fff;
+  font-size:30px;
+}
+</style>
+</head>
+<body>
+
+<h1>🍎 水果2048 🍉</h1>
+<div class="info">分数：<span id="score">0</span></div>
+
+<div id="gameContainer">
+  <div class="grid" id="grid"></div>
+</div>
+
+<button class="btn" onclick="initGame()">重新开始</button>
+
+<div class="gameOver" id="gameOverBox">
+  <div id="overText">游戏结束</div>
+  <button class="btn" style="margin-top:30px" onclick="hideOver();initGame()">再来一局</button>
+</div>
+
+<script>
+// 水果对应数值
+const fruitMap = {
+  2:'🍎',
+  4:'🍊',
+  8:'🍋',
+  16:'🍇',
+  32:'🍓',
+  64:'🍑',
+  128:'🍒',
+  256:'🥭',
+  512:'🍍',
+  1024:'🍌',
+  2048:' watermelon'
+};
+
+let gridData = [];
+let score = 0;
+const size = 4;
+
+// 初始化游戏
+function initGame(){
+  score = 0;
+  document.getElementById('score').innerText = score;
+  gridData = Array(size).fill().map(()=>Array(size).fill(0));
+  randomCell();
+  randomCell();
+  renderGrid();
+  hideOver();
+}
+
+// 随机生成一个2
+function randomCell(){
+  let empty = [];
+  for(let i=0;i<size;i++){
+    for(let j=0;j<size;j++){
+      if(gridData[i][j]===0) empty.push({x:i,y:j});
+    }
+  }
+  if(empty.length===0) return;
+  let p = empty[Math.floor(Math.random()*empty.length)];
+  gridData[p.x][p.y] = 2;
+}
+
+// 渲染棋盘
+function renderGrid(){
+  let html = '';
+  for(let i=0;i<size;i++){
+    for(let j=0;j<size;j++){
+      let val = gridData[i][j];
+      let emoji = fruitMap[val] || '';
+      html += `<div class="cell">${emoji}</div>`;
+    }
+  }
+  document.getElementById('grid').innerHTML = html;
+}
+
+// 键盘控制 上下左右
+document.addEventListener('keydown',e=>{
+  let before = JSON.stringify(gridData);
+  switch(e.key){
+    case 'ArrowUp': moveUp();break;
+    case 'ArrowDown': moveDown();break;
+    case 'ArrowLeft': moveLeft();break;
+    case 'ArrowRight': moveRight();break;
+  }
+  let after = JSON.stringify(gridData);
+  if(before!==after){
+    randomCell();
+    renderGrid();
+    checkGameOver();
+  }
+});
+
+// 左移
+function moveLeft(){
+  for(let i=0;i<size;i++){
+    let row = gridData[i].filter(v=>v!==0);
+    for(let j=0;j<row.length-1;j++){
+      if(row[j]===row[j+1]){
+        row[j] *=2;
+        score += row[j];
+        row.splice(j+1,1);
+      }
+    }
+    while(row.length<size) row.push(0);
+    gridData[i] = row;
+  }
+  document.getElementById('score').innerText = score;
+}
+
+// 右移
+function moveRight(){
+  for(let i=0;i<size;i++){
+    let row = gridData[i].filter(v=>v!==0);
+    for(let j=row.length-1;j>0;j--){
+      if(row[j]===row[j-1]){
+        row[j] *=2;
+        score += row[j];
+        row.splice(j-1,1);
+      }
+    }
+    while(row.length<size) row.unshift(0);
+    gridData[i] = row;
+  }
+  document.getElementById('score').innerText = score;
+}
+
+// 上移
+function moveUp(){
+  for(let j=0;j<size;j++){
+    let col = [];
+    for(let i=0;i<size;i++) col.push(gridData[i][j]);
+    col = col.filter(v=>v!==0);
+    for(let i=0;i<col.length-1;i++){
+      if(col[i]===col[i+1]){
+        col[i] *=2;
+        score += col[i];
+        col.splice(i+1,1);
+      }
+    }
+    while(col.length<size) col.push(0);
+    for(let i=0;i<size;i++) gridData[i][j] = col[i];
+  }
+  document.getElementById('score').innerText = score;
+}
+
+// 下移
+function moveDown(){
+  for(let j=0;j<size;j++){
+    let col = [];
+    for(let i=0;i<size;i++) col.push(gridData[i][j]);
+    col = col.filter(v=>v!==0);
+    for(let i=col.length-1;i>0;i--){
+      if(col[i]===col[i-1]){
+        col[i] *=2;
+        score += col[i];
+        col.splice(i-1,1);
+      }
+    }
+    while(col.length<size) col.unshift(0);
+    for(let i=0;i<size;i++) gridData[i][j] = col[i];
+  }
+  document.getElementById('score').innerText = score;
+}
+
+// 判断游戏结束
+function checkGameOver(){
+  for(let i=0;i<size;i++){
+    for(let j=0;j<size;j++){
+      if(gridData[i][j]===0) return;
+      let curr = gridData[i][j];
+      if(j+1<size && gridData[i][j+1]===curr) return;
+      if(i+1<size && gridData[i+1][j]===curr) return;
+    }
+  }
+  showOver();
+}
+
+function showOver(){
+  document.getElementById('gameOverBox').style.display='flex';
+}
+function hideOver(){
+  document.getElementById('gameOverBox').style.display='none';
+}
+
+// 初始化
+initGame();
+</script>
+</body>
+</html>
