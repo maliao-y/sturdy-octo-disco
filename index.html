@@ -1,1 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>游戏攻略大全 - 首页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+    body {
+      background: #f5f7fa;
+      color: #333;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.2rem;
+    }
+    .nav-links a:hover {
+      color: #3498db;
+    }
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-box input {
+      padding: 0.5rem 0.8rem;
+      border: none;
+      border-radius: 4px;
+      width: 220px;
+    }
+    .search-box button {
+      padding: 0.5rem 0.8rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
+    /* 轮播图 */
+    .slider {
+      width: 100%;
+      height: 450px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .slides {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transition: 0.5s;
+    }
+    .slide {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .slide-text {
+      position: absolute;
+      bottom: 60px;
+      left: 50px;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .dot.active {
+      background: white;
+    }
+
+    /* 分类 */
+    .category {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .category-list {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .category-list a {
+      text-decoration: none;
+      color: #555;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      background: #f1f5f9;
+    }
+    .category-list a:hover,
+    .category-list a.active {
+      background: #3498db;
+      color: white;
+    }
+
+    /* 攻略卡片 */
+    .guide-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .guide-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: 0.3s;
+    }
+    .guide-card:hover {
+      transform: translateY(-5px);
+    }
+    .guide-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .guide-info {
+      padding: 1rem;
+    }
+    .guide-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      background: #e1f5fe;
+      color: #0288d1;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    .guide-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .guide-desc {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.8rem;
+    }
+    .read-more {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .slider { height: 250px; }
+      .slide-text { font-size: 1.2rem; left: 20px; }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .search-box { width: 100%; }
+      .search-box input { flex:1; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="nav">
+      <div class="logo">🎮 游戏攻略大全</div>
+      <div class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="list.html">攻略列表</a>
+        <a href="detail.html">攻略详情</a>
+        <a href="#">关于我们</a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="搜索攻略...">
+        <button>搜索</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 轮播图 -->
+<div class="slider">
+  <div class="slides">
+    <div class="slide" style="background-image:url(https://picsum.photos/1600/900?random=10)">
+      <div class="slide-text">原神 5.0 全新攻略合集</div>
+    </div>
+    <div class="slide" style="background-image:url(https://picsum.photos/1600/900?random=11)">
+      <div class="slide-text">黑神话：悟空 全BOSS打法</div>
+    </div>
+    <div class="slide" style="background-image:url(https://picsum.photos/1600/900?random=12)">
+      <div class="slide-text">热门游戏技巧大全</div>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot active" onclick="goSlide(0)"></div>
+    <div class="dot" onclick="goSlide(1)"></div>
+    <div class="dot" onclick="goSlide(2)"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="category">
+    <div class="category-list">
+      <a href="#" class="active">全部</a>
+      <a href="#">开放世界</a>
+      <a href="#">动作游戏</a>
+      <a href="#">角色扮演</a>
+      <a href="#">射击游戏</a>
+      <a href="#">策略游戏</a>
+    </div>
+  </div>
+
+  <div class="guide-list">
+    <div class="guide-card">
+      <img src="https://picsum.photos/600/400?random=1">
+      <div class="guide-info">
+        <span class="guide-tag">开放世界</span>
+        <h3 class="guide-title">原神 5.0 宝箱全收集</h3>
+        <p class="guide-desc">一键跟着跑，不遗漏任何宝箱</p>
+        <a href="detail.html" class="read-more">查看详情</a>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <img src="https://picsum.photos/600/400?random=2">
+      <div class="guide-info">
+        <span class="guide-tag">动作游戏</span>
+        <h3 class="guide-title">黑神话：悟空 BOSS攻略</h3>
+        <p class="guide-desc">招式拆解+闪避时机+输出位置</p>
+        <a href="detail.html" class="read-more">查看详情</a>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <img src="https://picsum.photos/600/400?random=3">
+      <div class="guide-info">
+        <span class="guide-tag">角色扮演</span>
+        <h3 class="guide-title">龙腾世纪 职业推荐</h3>
+        <p class="guide-desc">新手最强职业与加点方案</p>
+        <a href="detail.html" class="read-more">查看详情</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2025 游戏攻略大全 - 仅供攻略分享</p>
+  </div>
+</footer>
+
+<script>
+  let slideIndex = 0;
+  const slides = document.querySelector(".slides");
+  const dots = document.querySelectorAll(".dot");
+
+  function showSlide() {
+    slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+    dots.forEach((d,i) => d.classList.toggle("active", i===slideIndex));
+  }
+
+  function goSlide(i) {
+    slideIndex = i;
+    showSlide();
+  }
+
+  setInterval(()=>{
+    slideIndex = (slideIndex+1)%3;
+    showSlide();
+  }, 4000);
+</script>
+</body>
+</html>
