@@ -85,6 +85,7 @@ h1{
 </div>
 
 <button class="btn" onclick="initGame()">重新开始</button>
+<button class="btn" onclick="location.href='index.html'" style="background:#3498db; margin-left:10px;">返回首页</button>
 
 <div class="gameOver" id="gameOverBox">
   <div id="overText">游戏结束</div>
@@ -104,7 +105,7 @@ const fruitMap = {
   256:'🥭',
   512:'🍍',
   1024:'🍌',
-  2048:' watermelon'
+  2048:'🍉'
 };
 
 let gridData = [];
@@ -156,6 +157,34 @@ document.addEventListener('keydown',e=>{
     case 'ArrowDown': moveDown();break;
     case 'ArrowLeft': moveLeft();break;
     case 'ArrowRight': moveRight();break;
+  }
+  let after = JSON.stringify(gridData);
+  if(before!==after){
+    randomCell();
+    renderGrid();
+    checkGameOver();
+  }
+});
+
+// 触屏滑动支持
+let touchStartX = 0;
+let touchStartY = 0;
+document.getElementById('gameContainer').addEventListener('touchstart',e=>{
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+});
+document.getElementById('gameContainer').addEventListener('touchend',e=>{
+  let touchEndX = e.changedTouches[0].clientX;
+  let touchEndY = e.changedTouches[0].clientY;
+  let dx = touchEndX - touchStartX;
+  let dy = touchEndY - touchStartY;
+  let before = JSON.stringify(gridData);
+  if(Math.abs(dx) > Math.abs(dy)){
+    if(dx > 30) moveRight();
+    else if(dx < -30) moveLeft();
+  } else {
+    if(dy > 30) moveDown();
+    else if(dy < -30) moveUp();
   }
   let after = JSON.stringify(gridData);
   if(before!==after){
