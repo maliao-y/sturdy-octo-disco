@@ -1,81 +1,95 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>攻略列表 - 游戏攻略大全</title>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family: "Microsoft YaHei", sans-serif; }
-    body { background:#f5f7fa; color:#333; }
-    .container { width:90%; max-width:1200px; margin:0 auto; }
-    header { background:#2c3e50; color:white; padding:1rem 0; position:sticky; top:0; z-index:999; }
-    .nav { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
-    .logo { font-size:1.5rem; font-weight:bold; }
-    .nav-links a { color:white; text-decoration:none; margin-left:1.2rem; }
-    .nav-links a:hover { color:#3498db; }
-    .search-box { display:flex; gap:0.5rem; }
-    .search-box input { padding:0.5rem 0.8rem; border:none; border-radius:4px; width:220px; }
-    .search-box button { padding:0.5rem 0.8rem; background:#3498db; color:white; border:none; border-radius:4px; cursor:pointer; }
-    
-    .page-title { margin:2rem 0; font-size:1.8rem; color:#222; }
-    .guide-list { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:1.5rem; margin-bottom:2rem; }
-    .guide-card { background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); transition:0.3s; }
-    .guide-card:hover { transform:translateY(-5px); }
-    .guide-card img { width:100%; height:180px; object-fit:cover; }
-    .guide-info { padding:1rem; }
-    .guide-tag { display:inline-block; font-size:0.75rem; background:#e1f5fe; color:#0288d1; padding:0.2rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; }
-    .guide-title { font-size:1.1rem; margin-bottom:0.5rem; }
-    .guide-desc { font-size:0.9rem; color:#666; margin-bottom:0.8rem; }
-    .read-more { color:#3498db; text-decoration:none; }
-
-    footer { background:#2c3e50; color:white; text-align:center; padding:1.5rem 0; margin-top:2rem; }
-    @media (max-width:768px) { .nav { flex-direction:column; align-items:flex-start; } .search-box { width:100%; } .search-box input { flex:1; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏攻略大全</title>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box; font-family:system-ui, sans-serif;}
+        body {max-width:1200px; margin:0 auto; padding:20px; background:#f5f7fa;}
+        nav {background:#222; padding:12px 16px; border-radius:8px; margin-bottom:24px;}
+        nav a {color:#fff; text-decoration:none; margin-right:16px; font-size:15px;}
+        nav a:hover {color:#42b9ff;}
+        h2 {margin:20px 0 12px; color:#111; border-left:4px solid #42b9ff; padding-left:10px;}
+        .tag-group {margin:10px 0 20px;}
+        .tag-group a {display:inline-block; background:#e0e8f5; padding:4px 12px; border-radius:20px; text-decoration:none; color:#225; margin:4px 6px 4px 0; font-size:14px;}
+        .card-wrap {display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px; margin-bottom:30px;}
+        .game-card {background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px #00000012;}
+        .game-card img {width:100%; height:180px; object-fit:cover; display:block;}
+        .card-body {padding:14px;}
+        .card-body h3 {font-size:17px; margin-bottom:8px; color:#111;}
+        .card-body p {font-size:14px; color:#555; line-height:1.5; margin-bottom:10px;}
+        .card-body a {color:#0066cc; text-decoration:none; font-size:14px; font-weight:500;}
+    </style>
 </head>
 <body>
+    <!-- 顶部导航 -->
+    <nav>
+        <a href="#">首页</a>
+        <a href="#">攻略列表</a>
+        <a href="#">攻略详情</a>
+        <a href="#">🍎 水果2048</a>
+        <a href="#">关于我们</a>
+    </nav>
 
-<header>
-  <div class="container">
-    <div class="nav">
-      <div class="logo">🎮 游戏攻略大全</div>
-     <div class="nav-links">
-  <a href="index.html">首页</a>
-  <a href="list.html">攻略列表</a>
-  <a href="delta-detail.html">攻略详情</a>
-  <a href="fruit2048.html">🍎 水果2048</a>
-  <a href="#">关于我们</a>
-</div>
-      <div class="search-box">
-        <input type="text" placeholder="搜索攻略...">
-        <button>搜索</button>
-      </div>
+    <h1>🎮 游戏攻略大全</h1>
+
+    <h2>原神 5.0 全新攻略合集</h2>
+    <h2>黑神话：悟空 全BOSS打法</h2>
+
+    <!-- 分类标签 -->
+    <div class="tag-group">
+        <a href="#">全部</a>
+        <a href="#">开放世界</a>
+        <a href="#">动作游戏</a>
+        <a href="#">角色扮演</a>
+        <a href="#">射击游戏</a>
+        <a href="#">策略游戏</a>
     </div>
-  </div>
-</header>
 
-<div class="container">
-  <h2 class="page-title">全部攻略</h2>
-  <div class="guide-list">
-    <div class="guide-card"><img src="https://picsum.photos/600/400?random=1"><div class="guide-info"><span class="guide-tag">开放世界</span><h3>原神 5.0 宝箱全收集</h3><p class="guide-desc">一键跟着跑，不遗漏任何宝箱</p><a href="detail.html" class="read-more">查看详情</a></div></div>
-    <div class="guide-card"><img src="https://picsum.photos/600/400?random=2"><div class="guide-info"><span class="guide-tag">动作游戏</span><h3>黑神话：悟空 BOSS攻略</h3><p class="guide-desc">招式拆解+闪避时机+输出位置</p><a href="detail.html" class="read-more">查看详情</a></div></div>
-    <div class="guide-card"><img src="https://picsum.photos/600/400?random=3"><div class="guide-info"><span class="guide-tag">角色扮演</span><h3>龙腾世纪 职业推荐</h3><p class="guide-desc">新手最强职业与加点方案</p><a href="detail.html" class="read-more">查看详情</a></div></div>
-    <div class="guide-card"><img src="https://picsum.photos/600/400?random=4"><div class="guide-info"><span class="guide-tag">射击游戏</span><h3>无畏契约 瞄准技巧</h3><p class="guide-desc">急停、压枪、预瞄教学</p><a href="detail.html" class="read-more">查看详情</a></div></div>
-    <div class="guide-card"><img src="https://picsum.photos/600/400?random=5"><div class="guide-info"><span class="guide-tag">策略游戏</span><h3>文明7 开局攻略</h3><p class="guide-desc">科技路线+城市规划技巧</p><a href="detail.html" class="read-more">查看详情</a></div></div>
-    <div class="guide-card"><img src="https://picsum.photos/600/400?random=6"><div class="guide-info"><span class="guide-tag">独立游戏</span><h3>星露谷物语 完美流程</h3><p class="guide-desc">季节规划+赚钱最快方法</p><a href="detail.html" class="read-more">查看详情</a></div></div>
-  <div class="guide-card">
-  <img src="https://picsum.photos/id/1060/600/400" alt="三角洲行动攻略封面">
-  <div class="guide-info">
-    <span class="guide-tag">射击游戏</span>
-    <h3 class="guide-title">三角洲行动 新手入门全攻略</h3>
-    <p class="guide-desc">武器推荐、地图点位、战术技巧，助你快速上手。</p>
-    <a href="delta-detail.html" class="read-more">查看详情</a>
-  </div>
-</div>
+    <!-- 攻略卡片容器 -->
+    <div class="card-wrap">
+        <!-- 开放世界 - 原神5.0 -->
+        <div class="game-card">
+            <img src="img/rail.jpg" alt="原神场景配图">
+            <div class="card-body">
+                <span style="font-size:13px; color:#666;">开放世界</span>
+                <h3>原神 5.0 宝箱全收集</h3>
+                <p>一键跟着跑，不遗漏任何宝箱</p>
+                <a href="#">查看详情</a>
+            </div>
+        </div>
 
-<footer>
-  <div class="container">
-    <p>© 2025 游戏攻略大全 - 仅供攻略分享</p>
-  </div>
-</footer>
+        <!-- 动作游戏 - 黑神话悟空 -->
+        <div class="game-card">
+            <img src="img/mug.jpg" alt="黑神话氛围配图">
+            <div class="card-body">
+                <span style="font-size:13px; color:#666;">动作游戏</span>
+                <h3>黑神话：悟空 BOSS攻略</h3>
+                <p>招式拆解+闪避时机+输出位置</p>
+                <a href="#">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 角色扮演 - 龙腾世纪 -->
+        <div class="game-card">
+            <img src="img/fog-forest.jpg" alt="森林雾景配图">
+            <div class="card-body">
+                <span style="font-size:13px; color:#666;">角色扮演</span>
+                <h3>龙腾世纪 职业推荐</h3>
+            </div>
+        </div>
+
+        <!-- 射击游戏 - 三角洲行动 -->
+        <div class="game-card">
+            <img src="img/coffee.jpg" alt="手冲咖啡配图">
+            <div class="card-body">
+                <span style="font-size:13px; color:#666;">射击游戏</span>
+                <h3>三角洲行动 新手入门全攻略</h3>
+                <p>武器推荐、地图点位、战术技巧，助你快速上手。</p>
+                <a href="#">查看详情</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
